@@ -163,16 +163,20 @@ class AutoBooker:
         url = f"https://bookings.better.org.uk/location/{location}/{activity}/{date}/by-location/slot/{time_slot}/6yuu8jj0/{court}"
 
         try:
+            # await page.goto(url, wait_until="domcontentloaded", timeout=45000)
+            # await page.wait_for_load_state("networkidle", timeout=45000)
             await page.goto(url)
             print(f"Navigated to {url}")
             return True
         except Exception as e:
             print(f"Error navigating to {url}: {e}")
             return False
+        
+
 
     async def book_activity(self, page: Page):
         try:
-            await page.wait_for_selector("text=Date:")
+            # await page.wait_for_selector("text=Date:")
 
             court_msg = await page.get_by_text(
                 re.compile("You are ineligible to book|No slot available", re.I)
@@ -183,8 +187,7 @@ class AutoBooker:
                 print("No court available to book")
                 return "No court"
 
-            # Add to basket
-
+            # Add to basket               
             await page.get_by_role("button", name="Add to basket").click()
             print("Activity added to basket")
             return True
@@ -250,6 +253,7 @@ class AutoBooker:
         except Exception as e:
             print(f"Error confirming booking: {e}")
             return False
+        
 
     async def run(self, automation, activation_time, headless: bool = False):
 
@@ -272,6 +276,15 @@ class AutoBooker:
 
             # Create main page for login and clear booking
             page = await self.create_page()
+            
+            async def block_heavy(route):
+                t = route.request.resource_type
+                if t in ("image", "font", "media"):
+                    await route.abort()
+                else:
+                    await route.continue_()
+
+            await self.context.route("**/*", block_heavy)
 
             is_login = await self.login(page)
             if not is_login:

@@ -28,12 +28,13 @@ async def task(auto_booker: AutoBooker, automation):
         return False
     
 async def schedule_bookings(auto_booker: AutoBooker, login_lead, headless: bool, update_interval: float):
-    config = get_config()
+    # config = get_config()
     
     triggered_today = set()
     last_date = None
     
-    while True:      
+    while True:  
+        config = get_config()    
         time_now = datetime.now()
         current_day = datetime.now().strftime('%A').lower()
         
