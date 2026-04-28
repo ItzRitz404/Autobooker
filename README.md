@@ -44,6 +44,9 @@ Make sure Python is installed on your computer.
 
 Python 3.10 or newer is recommended.
 
+If you do not have python installed please download it from here:
+[Python download](https://www.python.org/downloads/)
+
 This project uses:
 
 - `apscheduler`
