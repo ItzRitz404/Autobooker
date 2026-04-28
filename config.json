@@ -1,0 +1,110 @@
+[
+    {
+        "id": "01",
+        "name": "monday 18:40PM",
+        "enabled": true,
+        "location": "barnet-copthall-leisure-centre",
+        "activity": "badminton-40min",
+        "day": "monday",
+        "time": "18:40-19:20",
+        "court_number": "court-4",
+        "activation_day": "monday",
+        "activation_time": "21:59:58"
+    },
+    {
+        "id": "02",
+        "name": "monday 19:20PM",
+        "enabled": true,
+        "location": "barnet-copthall-leisure-centre",
+        "activity": "badminton-40min",
+        "day": "monday",
+        "time": "19:20-20:00",
+        "court_number": "court-4",
+        "activation_day": "monday",
+        "activation_time": "22:00:00"
+    },
+    {
+        "id": "03",
+        "name": "monday 20:00PM",
+        "enabled": true,
+        "location": "barnet-copthall-leisure-centre",
+        "activity": "badminton-40min",
+        "day": "monday",
+        "time": "20:00-20:40",
+        "court_number": "court-4",
+        "activation_day": "monday",
+        "activation_time": "22:00:02"
+    },
+    {
+        "id": "04",
+        "name": "thursday 18:00PM",
+        "enabled": true,
+        "location": "barnet-copthall-leisure-centre",
+        "activity": "badminton-40min",
+        "day": "thursday",
+        "time": "18:00-18:40",
+        "court_number": "court-4",
+        "activation_day": "thursday",
+        "activation_time": "21:59:58"
+    },
+    {
+        "id": "05",
+        "name": "thursday 18:40PM",
+        "enabled": true,
+        "location": "barnet-copthall-leisure-centre",
+        "activity": "badminton-40min",
+        "day": "thursday",
+        "time": "18:40-19:20",
+        "court_number": "court-3",
+        "activation_day": "thursday",
+        "activation_time": "22:00:00"
+    },
+    {
+        "id": "06",
+        "name": "thursday 19:20PM",
+        "enabled": true,
+        "location": "barnet-copthall-leisure-centre",
+        "activity": "badminton-40min",
+        "day": "thursday",
+        "time": "19:20-20:00",
+        "court_number": "court-3",
+        "activation_day": "thursday",
+        "activation_time": "22:00:02"
+    },
+    {
+        "id": "07",
+        "name": "sunday 15:00PM",
+        "enabled": true,
+        "location": "barnet-copthall-leisure-centre",
+        "activity": "badminton-60min",
+        "day": "sunday",
+        "time": "15:00-16:00",
+        "court_number": "court-3",
+        "activation_day": "sunday",
+        "activation_time": "21:59:58"
+    },
+    {
+        "id": "08",
+        "name": "sunday 16:00PM",
+        "enabled": true,
+        "location": "barnet-copthall-leisure-centre",
+        "activity": "badminton-60min",
+        "day": "sunday",
+        "time": "16:00-17:00",
+        "court_number": "court-3",
+        "activation_day": "sunday",
+        "activation_time": "22:00:00"
+    },
+    {
+        "id": "09",
+        "name": "sunday 17:00PM",
+        "enabled": true,
+        "location": "barnet-copthall-leisure-centre",
+        "activity": "badminton-60min",
+        "day": "sunday",
+        "time": "17:00-18:00",
+        "court_number": "court-3",
+        "activation_day": "sunday",
+        "activation_time": "22:00:02"
+    }
+]
