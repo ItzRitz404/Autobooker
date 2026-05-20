@@ -54,13 +54,6 @@ class AutoBooker:
 
     @staticmethod
     def get_next_date(target_day: str, target_time: str) -> str:
-        """
-        Always returns the date exactly 7 days from today.
-        Example:
-            Today: 2026-05-20
-            Returns: 2026-05-27
-        """
-
         target_date = datetime.now().date() + timedelta(days=7)
 
         return target_date.strftime("%Y-%m-%d")
