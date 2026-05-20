@@ -25,29 +25,44 @@ class AutoBooker:
             return json.load(f)
 
     @staticmethod
+    # def get_next_date(target_day: str, target_time: str) -> str:
+    #     # calculate the next occurence of the target day
+    #     days = {
+    #         "monday": 0,
+    #         "tuesday": 1,
+    #         "wednesday": 2,
+    #         "thursday": 3,
+    #         "friday": 4,
+    #         "saturday": 5,
+    #         "sunday": 6,
+    #     }
+
+    #     today = datetime.now().date()
+    #     target_day = days[target_day.lower()]
+    #     target_time_obj = datetime.strptime(target_time, "%H:%M").time()
+    #     now_time = datetime.now().time()
+
+    #     if today.weekday() == target_day and target_time_obj < now_time:
+    #         target_date = today + timedelta(days=7)
+    #         return target_date.strftime("%Y-%m-%d")
+
+    #     days_ahead = (target_day - today.weekday() + 7) % 7
+    #     target_date = today + timedelta(days=days_ahead)
+    #     return target_date.strftime("%Y-%m-%d")
+    
+    # from datetime import datetime, timedelta
+
+    @staticmethod
     def get_next_date(target_day: str, target_time: str) -> str:
-        # calculate the next occurence of the target day
-        days = {
-            "monday": 0,
-            "tuesday": 1,
-            "wednesday": 2,
-            "thursday": 3,
-            "friday": 4,
-            "saturday": 5,
-            "sunday": 6,
-        }
+        """
+        Always returns the date exactly 7 days from today.
+        Example:
+            Today: 2026-05-20
+            Returns: 2026-05-27
+        """
 
-        today = datetime.now().date()
-        target_day = days[target_day.lower()]
-        target_time_obj = datetime.strptime(target_time, "%H:%M").time()
-        now_time = datetime.now().time()
+        target_date = datetime.now().date() + timedelta(days=7)
 
-        if today.weekday() == target_day and target_time_obj < now_time:
-            target_date = today + timedelta(days=7)
-            return target_date.strftime("%Y-%m-%d")
-
-        days_ahead = (target_day - today.weekday() + 7) % 7
-        target_date = today + timedelta(days=days_ahead)
         return target_date.strftime("%Y-%m-%d")
 
     # async def launch_browser(self, headless: bool = False):
