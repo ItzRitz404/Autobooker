@@ -25,38 +25,38 @@ class AutoBooker:
             return json.load(f)
 
     @staticmethod
-    # def get_next_date(target_day: str, target_time: str) -> str:
-    #     # calculate the next occurence of the target day
-    #     days = {
-    #         "monday": 0,
-    #         "tuesday": 1,
-    #         "wednesday": 2,
-    #         "thursday": 3,
-    #         "friday": 4,
-    #         "saturday": 5,
-    #         "sunday": 6,
-    #     }
+    def get_next_date(target_day: str, target_time: str) -> str:
+        # calculate the next occurence of the target day
+        days = {
+            "monday": 0,
+            "tuesday": 1,
+            "wednesday": 2,
+            "thursday": 3,
+            "friday": 4,
+            "saturday": 5,
+            "sunday": 6,
+        }
 
-    #     today = datetime.now().date()
-    #     target_day = days[target_day.lower()]
-    #     target_time_obj = datetime.strptime(target_time, "%H:%M").time()
-    #     now_time = datetime.now().time()
+        today = datetime.now().date()
+        target_day = days[target_day.lower()]
+        target_time_obj = datetime.strptime(target_time, "%H:%M").time()
+        now_time = datetime.now().time()
 
-    #     if today.weekday() == target_day and target_time_obj < now_time:
-    #         target_date = today + timedelta(days=7)
-    #         return target_date.strftime("%Y-%m-%d")
+        if today.weekday() == target_day and target_time_obj < now_time:
+            target_date = today + timedelta(days=7)
+            return target_date.strftime("%Y-%m-%d")
 
-    #     days_ahead = (target_day - today.weekday() + 7) % 7
-    #     target_date = today + timedelta(days=days_ahead)
-    #     return target_date.strftime("%Y-%m-%d")
+        days_ahead = (target_day - today.weekday() + 7) % 7
+        target_date = today + timedelta(days=days_ahead)
+        return target_date.strftime("%Y-%m-%d")
     
     # from datetime import datetime, timedelta
 
-    @staticmethod
-    def get_next_date(target_day: str, target_time: str) -> str:
-        target_date = datetime.now().date() + timedelta(days=7)
+    # @staticmethod
+    # def get_next_date(target_day: str, target_time: str) -> str:
+    #     target_date = datetime.now().date() + timedelta(days=7)
 
-        return target_date.strftime("%Y-%m-%d")
+    #     return target_date.strftime("%Y-%m-%d")
 
     # async def launch_browser(self, headless: bool = False):
     async def launch_browser(self, headless: bool = False):
@@ -167,14 +167,18 @@ class AutoBooker:
         date = self.get_next_date(automation_dets["day"], target_times)
         time_slot = automation_dets["time"]
         court = automation_dets["court_number"]
+        min = automation_dets["min"]
 
-        url = f"https://bookings.better.org.uk/location/{location}/{activity}/{date}/by-location/slot/{time_slot}/6yuu8jj0/{court}"
+        url = f"https://bookings.better.org.uk/location/{location}/{activity}/{date}/by-location/"
+        
 
         try:
             # await page.goto(url, wait_until="domcontentloaded", timeout=45000)
             # await page.wait_for_load_state("networkidle", timeout=45000)
             await page.goto(url)
             print(f"Navigated to {url}")
+            await page.get_by_role("button", name=f"{court}, Barnet Copthall").click()
+            await page.get_by_role(f"link", name=f"{time_slot} {min}min £").click()
             return True
         except Exception as e:
             print(f"Error navigating to {url}: {e}")
@@ -264,7 +268,6 @@ class AutoBooker:
         
 
     async def run(self, automation, activation_time, headless: bool = False):
-
         page = None
         checkout_page = None
         pages = []
@@ -301,12 +304,13 @@ class AutoBooker:
 
             # Clear basket
             await self.clear_basket(page)
+            await page.pause()  # pause to inspect after login and clearing basket
 
             # # Create checkout page
             # checkout_page = await self.create_page()
 
             # Wait for activation time
-            await self.wait_for_activation_time(activation_time)
+            # await self.wait_for_activation_time(activation_time)
 
             for a in automations:
                 p = await self.create_page()
